@@ -1,5 +1,5 @@
 
-Shader "LakeWater" 
+Shader "Custom/LakeWater" 
 {
 	Properties 
 	{
