@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Threading;
 
 public class Manager : MonoBehaviour
 {
@@ -16,233 +17,37 @@ public class Manager : MonoBehaviour
 	private void OnApplicationQuit () { _instance = null; }
 	#endregion
 
-	public GameObject playerPrefab;
-	public GameObject pointerPrefab;
-	public GameObject treePrefab;
-	public GameObject housePrefab;
+	public GameObject PlayerPrefab;
+	public GameObject PointerPrefab;
+	public GameObject TreePrefab;
+	public GameObject HousePrefab;
 
 	private void Awake () 
 	{
-		ObjectType[] objects = new ObjectType[100] 
-		{
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-						ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-							ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-							ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-							ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-							ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-							ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-							ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-							ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-							ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.House,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.Tree,
-			ObjectType.House,
-			ObjectType.Tree,
-		};
-
-		Vector2[] positions = new Vector2[100] 
-		{
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-						new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-						new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-						new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-						new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-						new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-						new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-						new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-						new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-						new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-			new Vector2(Random.Range(-24, 25), Random.Range(-24, 25)),
-		};
-
-		for (int i = 0; i < 100; i++)
-		{
-			GameObject.Instantiate(objects[i] == ObjectType.Tree ? treePrefab : housePrefab, new Vector3(positions[i].x, 15, positions[i].y), Quaternion.identity);
-		}
-
-		GameObject.Instantiate(pointerPrefab, new Vector3(Random.Range(-24, 25), 15, Random.Range(-24, 25)), Quaternion.identity);
-		GameObject.Instantiate(playerPrefab, new Vector3(Random.Range(-24, 25), 15, Random.Range(-24, 25)), Quaternion.identity);
+		StartCoroutine(Init());
 	}
 
-	private void Update () 
+	// sequencially getting objects info from server and instantiating them
+	private IEnumerator Init ()
 	{
-    	
+		Thread thread = new Thread(Server.GetPoint);
+		thread.Start();
+		while (thread.IsAlive) yield return false;
+		GameObject.Instantiate(PointerPrefab, new Vector3(Server.PointerSpawnPosition.x, 15, Server.PointerSpawnPosition.y), Quaternion.identity);
+
+		thread = new Thread(Server.GetObstacles);
+		thread.Start();
+		while (thread.IsAlive) yield return false;
+		for (int i = 0; i < 100; i++)
+			GameObject.Instantiate(Server.ObstacleTypes[i] == ObstacleType.Tree ? TreePrefab : HousePrefab, 
+				new Vector3(Server.ObstacleSpawnPositions[i].x, 15, Server.ObstacleSpawnPositions[i].y), Quaternion.identity);
+
+		thread = new Thread(Server.GetPlayer);
+		thread.Start();
+		while (thread.IsAlive) yield return false;
+		GameObject.Instantiate(PlayerPrefab, new Vector3(Server.PlayerSpawnPosition.x, 15, Server.PlayerSpawnPosition.y), Quaternion.identity);
+
+		yield return true;
 	}
 
 	public void Restart ()

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlaceOnTerrain : MonoBehaviour
+public class PlaceableObject : MonoBehaviour
 {
-	private void Start () 
+	public virtual void Awake ()
 	{
 		// places the object on the terrain surface and randomizes its y-rotation
 		RaycastHit hit;
@@ -13,5 +13,4 @@ public class PlaceOnTerrain : MonoBehaviour
 			transform.eulerAngles = new Vector3(0, Random.Range(-180, 180), 0);
 		}
 	}
-
 }
