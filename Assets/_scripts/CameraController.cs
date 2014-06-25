@@ -44,7 +44,7 @@ public class CameraController : MonoBehaviour
 			#region MOUSE_INPUT
 			if (Application.isEditor)
 			{
-				if (Input.GetMouseButton(0))
+				if (Input.GetMouseButton(1))
 				{
 					Screen.lockCursor = true;
 					x += Input.GetAxis("Mouse X") * XSpeed * distance;
