@@ -17,14 +17,13 @@ public class Player : PlaceableObject
 	private void Start ()
 	{
 		GetComponentInChildren<TrailRenderer>().enabled = true;
+		navAgent.SetDestination(GameObject.FindGameObjectWithTag("DestinationPoint").transform.position);
 	}
 
 	private void Update () 
 	{
-		navAgent.SetDestination(GameObject.FindGameObjectWithTag("DestinationPoint").transform.position);
-
 		// restart if we can't reach the destination point
-		if (navAgent.pathStatus == NavMeshPathStatus.PathPartial) Manager.I.Restart();
+		if (navAgent.pathStatus != NavMeshPathStatus.PathComplete) Manager.I.Restart();
 
 		animator.SetFloat("Speed", navAgent.desiredVelocity.sqrMagnitude / 20, .2f, Time.deltaTime);
 	}
