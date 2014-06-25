@@ -53,10 +53,10 @@ Shader "Custom/LakeWater"
 			o.Alpha = _Color.a;
 			o.Gloss = 1;
 			o.Specular = _Shininess;
-    		o.Albedo = _Color.rgb;
+    			o.Albedo = _Color.rgb;
 
 			// rimlight simulation
-    		o.Emission = texCUBE(_Cube, WorldReflectionVector(IN, o.Normal)).rgb * _ReflectColor.rgb;
+    			o.Emission = texCUBE(_Cube, WorldReflectionVector(IN, o.Normal)).rgb * _ReflectColor.rgb;
 		}
 
 		ENDCG
