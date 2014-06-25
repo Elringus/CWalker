@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
 
 	private void Start ()
 	{
-		navAgent.SetDestination(GameObject.Find("player-destination-point").transform.position);
+		navAgent.SetDestination(GameObject.FindGameObjectWithTag("DestinationPoint").transform.position);
+		GetComponentInChildren<TrailRenderer>().enabled = true;
 	}
 
 	private void Update () 
