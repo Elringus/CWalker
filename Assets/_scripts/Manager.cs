@@ -3,6 +3,19 @@ using System.Collections;
 
 public class Manager : MonoBehaviour
 {
+	#region SINGLETON
+	private static Manager _instance;
+	public static Manager I
+	{
+		get
+		{
+			if (_instance == null) _instance = FindObjectOfType(typeof(Manager)) as Manager;
+			return _instance;
+		}
+	}
+	private void OnApplicationQuit () { _instance = null; }
+	#endregion
+
 	public GameObject playerPrefab;
 	public GameObject pointerPrefab;
 	public GameObject treePrefab;
@@ -50,5 +63,10 @@ public class Manager : MonoBehaviour
 	private void Update () 
 	{
     	
+	}
+
+	public void Restart ()
+	{
+		Application.LoadLevel(Application.loadedLevel);
 	}
 }

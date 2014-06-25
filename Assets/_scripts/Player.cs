@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
 
 	private void Update () 
 	{
+		// restart if we can't reach the destination point
+		if (navAgent.pathStatus == NavMeshPathStatus.PathPartial) Manager.I.Restart();
+
 		animator.SetFloat("Forward", navAgent.desiredVelocity.sqrMagnitude / 20, .2f, Time.deltaTime);
 	}
 }

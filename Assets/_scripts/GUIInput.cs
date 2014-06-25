@@ -5,6 +5,6 @@ public class GUIInput : MonoBehaviour
 {
 	private void OnGUI ()
 	{
-		if (GUILayout.Button("Restart")) Application.LoadLevel(Application.loadedLevel);
+		if (GUILayout.Button("Restart")) Manager.I.Restart();
 	}
 }
